@@ -69,31 +69,36 @@ class Tonghuashun(object):
             cjl=arr[0]
         cjl=cjl.decode('utf-8')
         return cjl
-    def refreshStock(self,type,start,end):
-        typePath=self.filePath+type+'\\'
-        if os.path.exists(typePath)==False:
-            os.mkdir(typePath)
+    def refreshStock(self,bankuai,start,end):
+        reqtime=0.0
+        dbtime=0.0
         for i in range(start,end):
             id='%06d'%i
+            reqstart=time.clock()
             stockInfo=self.refreshOneStock(id)
+            reqend=time.clock()
+            reqtime=reqtime+reqend-reqstart
             if stockInfo==None:
                 continue
             name=stockInfo['stockname']
             name=self.normalizeName(name)
             cjl=self.normalizeCJL(stockInfo['cjl'])
-            strInfo=id+'\t'+self.date+'\t'+type+'\t'+stockInfo['fieldname']+\
+            strInfo=id+'\t'+self.date+'\t'+bankuai+'\t'+stockInfo['fieldname']+\
             '\t'+name+'\t'+stockInfo['kp']+'\t'+stockInfo['xj']+'\t'+\
             stockInfo['zg']+'\t'+stockInfo['zd']+'\t'+cjl
             print strInfo
             arrStockInfo=strInfo.split('\t')
+            dbstart=time.clock()
             self.db.refreshStockDaily(arrStockInfo)
+            dbend=time.clock()
+            dbtime=dbtime+dbend-dbstart
             time.sleep(1)
+        strRunTime='From '+str(start)+' to '+str(end)+',[total request_time]:'+str(reqtime)+' [total database_time]:'+str(dbtime)
+        print strRunTime
+        self.log.runLog(strRunTime)
     def refreshIndex(self):
-        indexPath=self.filePath+u'指数\\'
-        if os.path.exists(indexPath)==False:
-            os.mkdir(indexPath)
         url=r'http://q.10jqka.com.cn/interface/stock/zs/zdf/desc/1/quote/quote'
-        print url
+        #print url
         headers = {'User-Agent':'Mozilla/5.0 (X11; U; Linux i686)Gecko/20071127 Firefox/2.0.0.11'}  
         req = Request(url=url,headers=headers)  
         responce=urlopen(req)
