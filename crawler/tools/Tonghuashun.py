@@ -1,5 +1,5 @@
 #!/bin/python
-#coding=utf-8
+#-*- coding:UTF-8 -*-
 import os
 from urllib2 import *
 from bs4 import BeautifulSoup #html解析
@@ -36,7 +36,10 @@ class Tonghuashun(object):
         try:
             responce=urlopen(req)
             try:
+                #print responce.info()
+                charset=responce.info().getheader('Content-Type')
                 jsonData=responce.read()
+                #jsonDecode=unicode(jsonData,'UTF-8')
                 try:
                     arrInfo=json.loads(jsonData)
                     if arrInfo['stockname']=='':
@@ -119,13 +122,12 @@ class Tonghuashun(object):
             self.log.errorLog(strLog)
     def run(self):
         self.refreshIndex()
-        self.refreshStock(u'深证A股',1,2)
-        '''self.refreshStock(u'深证A股',1690,1899)
+        self.refreshStock(u'深证A股',1,1000)
+        self.refreshStock(u'深证A股',1690,1899)
         self.refreshStock(u'上证A股',600000,602000)
-        self.refreshStock(u'上证A股',600525,602000)
-        self.refreshStock(u'上证A股',603000,603333)
+        self.refreshStock(u'上证A股',603000,604000)
         self.refreshStock(u'中小板',2001,2800)
-        self.refreshStock(u'创业板',300001,300350)'''
+        self.refreshStock(u'创业板',300001,300350)
         self.log.close()
         self.db.close()
         print 'tonghuashun done!'

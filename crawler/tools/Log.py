@@ -3,7 +3,7 @@
 import os
 import time
 class Log(object):
-    logpath=r'D:\WorkSpace\python\StockPrediction\Log'+"\\"
+    logpath=r'.\Log'+"\\"
     def __init__(self,logpath=None):
         if logpath!=None:
             self.logpath=logpath

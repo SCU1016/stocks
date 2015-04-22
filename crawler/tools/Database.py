@@ -1,5 +1,5 @@
 #!/bin/python
-#coding=utf-8
+#-*- coding:utf-8 -*-
 import sqlite3
 from Log import *
 class Database(object):
@@ -25,7 +25,7 @@ class Database(object):
     def createTables(self):
         #股票id名称映射
         sqlCreate='create table if not exists '+self.stock_info+'(id integer primary key autoincrement, \
-                    stock_id TEXT,name TEXT,bankuai text,hangye text)'
+                    stock_id TEXT unique,name TEXT,bankuai text,hangye text)'
         self.cur.execute(sqlCreate)
         #所有股票每日信息
         sqlCreate='create table if not exists '+self.stock_daily+'(id integer primary key autoincrement, \
@@ -49,16 +49,28 @@ class Database(object):
         self.cur.execute(sqlCreate)
         #指数信息
         sqlCreate='create table if not exists '+self.index_info+'(id integer primary key autoincrement, \
-                   index_id TEXT,name TEXT)'
+                   index_id TEXT unique,name TEXT)'
         self.cur.execute(sqlCreate)
         #指数每日信息
         sqlCreate='create table if not exists '+self.index_daily+'(id integer primary key autoincrement, \
-                   index_id TEXT,name TEXT,trade_date TEXT,value numeric,zde numeric,zdf numeric)'
+                   index_id TEXT,trade_date TEXT,value numeric,zde numeric,zdf numeric)'
         self.cur.execute(sqlCreate)
         #板块对应表名信息
         sqlCreate='create table if not exists '+self.bankuai_info+'(id integer primary key autoincrement, \
-                   name TEXT,refer_table TEXT)'
+                   name TEXT unique,refer_table TEXT)'
         self.cur.execute(sqlCreate)
+        sqlInsert="insert or ignore into "+self.index_info+"(index_id,name) values ('1A0001','上证指数')"
+        self.cur.execute(sqlInsert)
+        sqlInsert="insert or ignore into "+self.index_info+"(index_id,name) values ('399001','深证成指')"
+        self.cur.execute(sqlInsert)
+        sqlInsert="insert or ignore into "+self.index_info+"(index_id,name) values ('1B0300','沪深300')"
+        self.cur.execute(sqlInsert)
+        sqlInsert="insert or ignore into "+self.bankuai_info+"(name,refer_table) values ('上证A股','stock_daily_hu')"
+        self.cur.execute(sqlInsert)
+        sqlInsert="insert or ignore into "+self.bankuai_info+"(name,refer_table) values ('深证A股','stock_daily_shen')"
+        self.cur.execute(sqlInsert)
+        sqlInsert="insert or ignore into "+self.bankuai_info+"(name,refer_table) values ('创业板','stock_daily_chuang')"
+        self.cur.execute(sqlInsert)
     def selectStockById(self,stock_id):
         res=[]
         sqlSel='select * from '+self.stock_info+' where stock_id=?'
@@ -69,8 +81,8 @@ class Database(object):
             strError='查询失败:'+e.args[0]
             self.log.dataErrorLog(strError)
         return res 
-    def insertStock(self,stock_id,stock_name,type,hangye):
-        sqlIns='insert into '+self.stock_info+'(stock_id,name,bankuai,hangye) values(?,?,?,?)'
+    def ifInsertStock(self,stock_id,stock_name,type,hangye):
+        sqlIns='insert or ignore into '+self.stock_info+'(stock_id,name,bankuai,hangye) values(?,?,?,?)'
         try:
             self.cur.execute(sqlIns,[stock_id,stock_name,type,hangye])
         except sqlite3.Error,e:
@@ -124,11 +136,8 @@ class Database(object):
         except sqlite3.Error,e:
             strError='插入表失败:'+e.args[0]
             self.log.dataErrorLog(strError)
-    def ifAddStock(self,stock):
-        if not self.selectStockById(stock[0]):
-            self.insertStock(stock[0],stock[4],stock[2],stock[3])
     def refreshStockDaily(self,arrStock):
-        self.ifAddStock(arrStock)
+        self.ifInsertStock(arrStock[0],arrStock[4],arrStock[2],arrStock[3])
         #删除stockname，type和行业
         type=arrStock[2]
         tableInfo=self.selectBankuaiInfoByName(type)
