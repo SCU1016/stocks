@@ -27,17 +27,18 @@ class Tonghuashun(object):
         print strStart
         self.log.runLog(strStart)
         if hp!=None:
-            self.homePage=hp;
-    def refreshOneStock(self,id):
+            self.homePage=hp
+        self.recrawlerStk=list()
+    def crawlerOneStock(self,id):
         url=self.homePage+r'spService/'+str(id)+r'/Header/realHeader'
-        print url
+        #print url
         headers = {'User-Agent':'Mozilla/5.0 (X11; U; Linux i686)Gecko/20071127 Firefox/2.0.0.11'}  
         req = Request(url=url,headers=headers)  
         try:
             responce=urlopen(req)
             try:
                 #print responce.info()
-                charset=responce.info().getheader('Content-Type')
+                charSet=responce.info().getheader('Content-Type')
                 jsonData=responce.read()
                 #jsonDecode=unicode(jsonData,'UTF-8')
                 try:
@@ -45,7 +46,7 @@ class Tonghuashun(object):
                     if arrInfo['stockname']=='':
                         strLog=str(id)+' is Null!'
                         self.log.runLog(strLog)
-                        arrInfo=None        
+                        arrInfo=''
                 except:
                     strLog='crawler can\'t get data by '+str(id)
                     self.log.errorLog(strLog)
@@ -72,16 +73,18 @@ class Tonghuashun(object):
             cjl=arr[0]
         cjl=cjl.decode('utf-8')
         return cjl
-    def refreshStock(self,bankuai,start,end):
+    def crawlerStocks(self,bankuai,start,end):
         reqtime=0.0
         dbtime=0.0
         for i in range(start,end):
             id='%06d'%i
             reqstart=time.clock()
-            stockInfo=self.refreshOneStock(id)
+            stockInfo=self.crawlerOneStock(id)
             reqend=time.clock()
             reqtime=reqtime+reqend-reqstart
-            if stockInfo==None:
+            if stockInfo==None or stockInfo=='':
+                if stockInfo==None:
+                    self.recrawlerStk.append([id,bankuai])
                 continue
             name=stockInfo['stockname']
             name=self.normalizeName(name)
@@ -99,7 +102,32 @@ class Tonghuashun(object):
         strRunTime='From '+str(start)+' to '+str(end)+',[total request_time]:'+str(reqtime)+' [total database_time]:'+str(dbtime)
         print strRunTime
         self.log.runLog(strRunTime)
-    def refreshIndex(self):
+    def recrawlerStocks(self):
+        reqtime=0.0
+        dbtime=0.0
+        for stock in self.recrawlerStk:
+            id=stock[0]
+            bankuai=stock[1]
+            reqstart=time.clock()
+            stockInfo=self.crawlerOneStock(id)
+            reqend=time.clock()
+            reqtime=reqtime+reqend-reqstart
+            if stockInfo==None or stockInfo=='':
+                continue
+            name=stockInfo['stockname']
+            name=self.normalizeName(name)
+            cjl=self.normalizeCJL(stockInfo['cjl'])
+            strInfo=id+'\t'+self.date+'\t'+bankuai+'\t'+stockInfo['fieldname']+\
+            '\t'+name+'\t'+stockInfo['kp']+'\t'+stockInfo['xj']+'\t'+\
+            stockInfo['zg']+'\t'+stockInfo['zd']+'\t'+cjl
+            print strInfo
+            arrStockInfo=strInfo.split('\t')
+            dbstart=time.clock()
+            self.db.refreshStockDaily(arrStockInfo)
+            dbend=time.clock()
+            dbtime=dbtime+dbend-dbstart
+            time.sleep(1)
+    def crawlerIndex(self):
         url=r'http://q.10jqka.com.cn/interface/stock/zs/zdf/desc/1/quote/quote'
         #print url
         headers = {'User-Agent':'Mozilla/5.0 (X11; U; Linux i686)Gecko/20071127 Firefox/2.0.0.11'}  
@@ -121,13 +149,14 @@ class Tonghuashun(object):
             print strLog
             self.log.errorLog(strLog)
     def run(self):
-        self.refreshIndex()
-        self.refreshStock(u'深证A股',1,1000)
-        self.refreshStock(u'深证A股',1690,1899)
-        self.refreshStock(u'上证A股',600000,602000)
-        self.refreshStock(u'上证A股',603000,604000)
-        self.refreshStock(u'中小板',2001,2800)
-        self.refreshStock(u'创业板',300001,300350)
+        self.crawlerIndex()
+        self.crawlerStocks(u'深证A股',1,1000)
+        self.crawlerStocks(u'深证A股',1690,1899)
+        self.crawlerStocks(u'上证A股',600000,602000)
+        self.crawlerStocks(u'上证A股',603000,604000)
+        self.crawlerStocks(u'中小板',2001,2800)
+        self.crawlerStocks(u'创业板',300001,300350)
+        self.recrawlerStocks()
         self.log.close()
         self.db.close()
         print 'tonghuashun done!'
