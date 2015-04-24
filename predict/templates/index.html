@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+{% load staticfiles %}
+<head>
+    {% include 'common/_head.html' %}
+</head>
+<body>
+<header class="sk-header uk-text-center uk-clearfix uk-hidden-small">
+    <a href="index.html"><img src="{%  static "images/logo.png" %}" width="130" height="80" alt="Demo"></a>
+</header>
+
+
+<div class="uk-container uk-container-center">
+    <nav class="uk-navbar sk-navbar">
+        <ul class="uk-navbar-nav uk-hidden-small">
+            <li class="uk-parent uk-active" data-uk-dropdown="{}" aria-haspopup="true" aria-expanded="false">
+                <a href="index.html">HOME</a>
+                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-width-1">
+                    <div class="uk-grid uk-dropdown-grid">
+                        <div class="uk-width-1-1">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li>
+                                    <a href="#">Default</a>
+                                </li>
+                                <li>
+                                    <a href="#">Red</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="uk-parent" data-uk-dropdown="{}" aria-haspopup="true" aria-expanded="false">
+                <a href="#">ABOUT</a>
+                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-width-1">
+                    <div class="uk-grid uk-dropdown-grid">
+                        <div class="uk-width-1-1">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li>
+                                    <a href="#">Layouts</a>
+                                </li>
+                                <li>
+                                    <a href="#">UIkit</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="uk-parent" data-uk-dropdown="{}" aria-haspopup="true" aria-expanded="false">
+                <a href="#">HELP</a>
+                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-width-1">
+                    <div class="uk-grid uk-dropdown-grid">
+                        <div class="uk-width-1-1">
+                            <ul class="uk-nav uk-nav-navbar">
+                                <li><a href="#">Slideshow</a>
+                                </li>
+                                <li><a href="#">Slideset</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+
+    </nav>
+
+    <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+        <div class="uk-width-medium-1-4">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary uk-text-center">
+                <h2 class="uk-margin-remove">上证指数</h2>
+
+                <div>Sign up for the newsletter</div>
+            </div>
+        </div>
+        <div class="uk-width-medium-1-4">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary uk-text-center">
+                <h2 class="uk-margin-remove">深证成指</h2>
+
+                <div>Sign up for the newsletter</div>
+            </div>
+        </div>
+        <div class="uk-width-medium-1-4">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary uk-text-center">
+                <h2 class="uk-margin-remove">恒生指数</h2>
+
+                <div>Sign up for the newsletter</div>
+            </div>
+        </div>
+        <div class="uk-width-medium-1-4">
+            <div class="uk-panel uk-panel-box uk-panel-box-primary uk-text-center">
+                <h2 class="uk-margin-remove">道琼斯指数</h2>
+
+                <div>Sign up for the newsletter</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="uk-grid uk-margin-large-top">
+        <div class="uk-width-medium-2-3">
+            <section class="tm-main-top uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin="">
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+                <div class="uk-width-medium-1-3 uk-width-small-1-2">
+                    <div class="uk-panel uk-panel-box">
+                        <div class="uk-panel-badge uk-badge"><i class="uk-icon-star"></i></div>
+                        <div class="uk-panel-teaser">
+                            <img src="{% static "images/home_prague.jpg" %}" width="722" height="407" alt="">
+                        </div>
+                        <h3 class="uk-margin-bottom-remove">Powered by Warp7</h3>
+
+                        <div>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-secondary-color"></i>
+                            <i class="uk-icon-star tm-icon-muted"></i>
+                        </div>
+
+                        <a class="uk-button uk-align-right" href="#">Book room</a>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <aside class="uk-width-medium-1-3">
+            <ul class="uk-tab uk-tab-grid" data-uk-tab="{connect:'#tab-content'}">
+                <li class="uk-width-1-3 uk-active"><a href="#">Year</a></li>
+                <li class="uk-width-1-3"><a href="#">Month</a></li>
+                <li class="uk-width-1-3"><a href="#">Week</a></li>
+            </ul>
+            <ul id="tab-content" class="sk-tab-content uk-switcher">
+                <li class="uk-active">
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-1-1 uk-width-medium-1-1">
+                            <img src="{% static "images/home_graph_year.png" %}" alt="Demo">
+                        </div>
+                        <div class="uk-width-1-1 uk-width-medium-1-1 uk-grid-margin">
+                            <hr class="uk-hidden-small uk-margin-top-remove">
+                            <div class="uk-grid" data-uk-grid-margin="">
+                                <div class="uk-width-1-2">
+                                    Total Customers<br>
+
+                                    <div class="uk-text-large tm-primary-color">246.500</div>
+                                </div>
+                                <div class="uk-width-1-2">
+                                    Returning<br>
+
+                                    <div class="uk-text-large tm-primary-color">131.300</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="{% static "images/home_graph_month.png" %}" alt="Demo">
+                    <hr>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            Total Customers<br>
+
+                            <div class="uk-text-large tm-primary-color">246.500</div>
+                        </div>
+                        <div class="uk-width-1-2">
+                            Returning<br>
+
+                            <div class="uk-text-large tm-primary-color">131.300</div>
+                        </div>
+                    </div>
+                </li>
+                <li class="">
+                    <img src="{% static "images/home_graph_day.png" %}" alt="Demo">
+                    <hr>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            Total Customers<br>
+
+                            <div class="uk-text-large tm-primary-color">246.500</div>
+                        </div>
+                        <div class="uk-width-1-2">
+                            Returning<br>
+
+                            <div class="uk-text-large tm-primary-color">131.300</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer class="sk-footer">
+        <a class="sk-totop-scroller" data-uk-smooth-scroll="" href="#"><i class="uk-icon-chevron-up"></i></a>
+
+        <div class="uk-panel">
+            Copyright © 2015 SCU1016
+        </div>
+        <div>
+            Powered by <a href="">SCU1016</a>
+        </div>
+
+    </footer>
+
+</div>
+
+
+
+<div id="offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <div class="uk-panel widget_search">
+            <form class="uk-search" id="search-4" action="#" method="get" role="search">
+                <input class="uk-search-field" type="text" value="" name="s" placeholder="search...">
+            </form>
+        </div>
+        <ul class="uk-nav uk-nav-offcanvas">
+            <li class="uk-parent uk-active"><a href="index.html">Home</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="#">Default</a></li>
+                    <li><a href="#">Red</a></li>
+                </ul>
+            </li>
+            <li class="uk-parent"><a
+                    href="#">About</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="#">Layouts</a></li>
+                    <li><a href="#">UIkit</a></li>
+                </ul>
+            </li>
+            <li class="uk-parent"><a
+                    href="#">Help</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="#">Slideshow</a></li>
+                    <li><a href="#">Slideset</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+</div>
+
+{% include 'common/script.html' %}
+</body>
+</html>

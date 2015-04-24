@@ -1,2 +1,0 @@
-# stocks
-stocks project

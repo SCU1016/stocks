@@ -1,0 +1,48 @@
+body{
+    padding: 0;
+    background: #678ca6;
+}
+.sk-header{
+    padding: 30px 0;
+}
+.sk-navbar{
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background-image: url('../images/panel-box-noise-bg.png');
+    box-shadow: 0 1px 3px rgba(30, 50, 70, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.sk-navbar, .sk-footer{
+    margin: 15px 0;
+}
+
+.sk-tab-content{
+    padding: 30px;
+    background: #ffffff;
+}
+
+.sk-footer{
+    position: relative;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    background-image: url('../images/panel-box-noise-bg.png');
+    box-shadow: 0 1px 3px rgba(30, 50, 70, 0.3), inset 0 0 1px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.sk-totop-scroller{
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 20px;
+    height: 20px;
+    color: #ffffff !important;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    -webkit-transition: all linear 0.05s;
+    transition: all linear 0.05s;
+}
